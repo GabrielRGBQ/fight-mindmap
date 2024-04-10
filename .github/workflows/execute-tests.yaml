@@ -1,0 +1,18 @@
+name: Test app
+run-name: Running tests with Pytest
+on: [workflow_dispatch]
+
+jobs:
+  Run-tests:
+   runs-on: windows-latest
+   steps:
+    - name: Checkout directory
+      uses: actions/checkout@v4
+    - name: Set up Python 
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.7"
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Execute tests
+      run: python -m pytest
