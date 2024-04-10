@@ -14,5 +14,7 @@ jobs:
         python-version: "3.7"
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: Run the appplication
+      run: uvicorn app.main:app
     - name: Execute tests
       run: python -m pytest
