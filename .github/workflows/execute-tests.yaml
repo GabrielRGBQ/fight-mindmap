@@ -15,6 +15,8 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run the appplication
-      run: uvicorn app.main:app
+      run: start /B uvicorn app.main:app
+    - name: Wait for application to start
+      run: timeout /t 10 /nobreak > nul
     - name: Execute tests
       run: python -m pytest
