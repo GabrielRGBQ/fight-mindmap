@@ -1,8 +1,9 @@
 import requests
-from fastapi.testclient import TestClient
+from ..app.config import settings
+# from fastapi.testclient import TestClient
 # from app.main import app
 
-URL = 'http://localhost:8000/users/'
+URL = F'http://{settings.listening_port}:8000/users/'
 
 def test_create_user():
     data = {"name": "string",
