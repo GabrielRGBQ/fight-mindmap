@@ -27,6 +27,6 @@ jobs:
     - name: Run the appplication
       run: uvicorn app.main:app --host localhost --port 8000 &
     - name: Wait for application to start
-      run: sleep 10
+      run: sleep 120
     - name: Execute tests
       run: python -m pytest
