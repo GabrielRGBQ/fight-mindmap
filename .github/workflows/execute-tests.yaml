@@ -11,7 +11,7 @@ jobs:
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
       DATABASE_NAME: ${{secrets.DATABASE_NAME}}
       DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
-      LISTENING_PORT: ${{secrets.LISTENING_PORT}}
+      # LISTENING_PORT: ${{secrets.LISTENING_PORT}}
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -41,8 +41,3 @@ jobs:
       run: |
         pip install pytest
         python -m pytest
-    # - name: Check secrets are working
-    #   run: |
-    #     echo "Database name ${{secrets.DATABASE_NAME}}"
-    #     echo "Database password ${{secrets.DATABASE_PASSWORD}}"
-    #     echo "Host name ${{env.DATABASE_HOSTNAME}}"
