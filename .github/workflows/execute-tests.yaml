@@ -25,7 +25,7 @@ jobs:
          python -m pip install --upgrade pip
          pip install -r requirements.txt
     - name: Run the appplication
-      run: uvicorn app.main:app &
+      run: uvicorn app.main:app --port 8000 &
     - name: Wait for application to start
       run: sleep 10
     - name: Execute tests
