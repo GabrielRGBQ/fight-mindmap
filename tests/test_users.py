@@ -3,7 +3,7 @@ from app.config import settings
 # from fastapi.testclient import TestClient
 # from app.main import app
 
-URL = F'http://localhost:{settings.listening_port}/users/'
+URL = f'http://localhost:{settings.listening_port}/users/'
 
 def test_create_user():
     data = {"name": "string",

@@ -4,8 +4,16 @@ on: [workflow_dispatch]
 
 jobs:
   Run-tests:
-   runs-on: ubuntu-latest
-   steps:
+    environment: testing
+    env:
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
+      DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+      DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+      DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+      DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+      LISTENING_PORT: ${{secrets.LISTENING_PORT}}
+    runs-on: ubuntu-latest
+    steps:
     - name: Checkout directory
       uses: actions/checkout@v4
     - name: Set up Python 
