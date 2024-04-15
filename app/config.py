@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     database_password: str
     database_name: str
     database_username: str
-    listening_port: str
+    # listening_port: str
 
     class Config:
         env_file = ".env"
