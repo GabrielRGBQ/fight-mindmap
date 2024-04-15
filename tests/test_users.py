@@ -1,19 +1,11 @@
-# import requests
-from app.config import settings
-from fastapi.testclient import TestClient
-from app.main import app
+from app.model import schemas
 
-# URL = f'http://localhost:{settings.listening_port}/users/'
+def test_create_user(client):
+    res = client.post(
+        "/users/", json={"email": "hello123@gmail.com", "name": "nombre", "password": "password123"}
+    )
+    new_user = schemas.UserOut(**res.json())
+    assert new_user.email == "hello123@gmail.com"
+    assert res.status_code == 201
 
-# def test_create_user():
-#     data = {"name": "string",
-#             "email": "user@example.com"}
-#     response = requests.post(url=URL, json=data)
-#     assert response.status_code == 200
 
-client = TestClient(app)
-
-def test_create_user_testclient():
-    data = {"name": "string", "email": "user@example.com"}
-    response = client.post("/users/", json=data)
-    assert response.status_code == 200

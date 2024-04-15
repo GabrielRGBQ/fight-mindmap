@@ -10,5 +10,16 @@ of the returned data
 ############################################
 
 class User(BaseModel):
-    name: str
     email: EmailStr
+
+class UserCreate(User):
+    name: str
+    password: str
+
+class UserLogin(User):
+    email: EmailStr
+    password: str
+
+class UserOut(User):
+    id: int
+    name: str
