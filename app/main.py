@@ -6,7 +6,7 @@ from .database import engine
 
 # Create the tables in the database if they don't already exist
 # It will be needed no longer when we start using alembic
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
