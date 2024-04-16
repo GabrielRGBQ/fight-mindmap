@@ -2,6 +2,7 @@ from app.config import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.database import Base, get_db
+from app.model import models, schemas
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
@@ -35,3 +36,15 @@ def client(session):
     yield TestClient(app)
     # Here is what is run after the test has been run
     # Base.metadata.drop_all(bind=engine)
+
+@pytest.fixture
+def populate_user(session):
+    """
+    Add a user to the testing database
+    """
+    user_data = {"email": "hello123@gmail.com", "name": "nombre", "password": "password123"}
+    def create_user_model(user_data: schemas.UserCreate):
+        return models.User(**user_data)
+    new_user = create_user_model(user_data)
+    session.add(new_user)
+    session.commit()
