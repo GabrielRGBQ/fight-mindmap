@@ -2,6 +2,7 @@ from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from ..model import schemas, models
+from .. import utils
 from ..database import get_db
 
 """
@@ -15,8 +16,10 @@ async def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)) -
     """
     Create a new user
     """
+    hashed_password = utils.hash(user.password)
+    user.password = hashed_password
+    new_user = models.User(**user.model_dump())
     try:
-        new_user = models.User(**user.model_dump())
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
