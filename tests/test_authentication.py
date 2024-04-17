@@ -20,7 +20,7 @@ def test_login_user(client, test_user):
 @pytest.mark.parametrize(
     "email, password, status_code",
     [
-        ("wrongemail@gmail.com", "password123", 403),
+        ("wrongemail@gmail.com", "password123", 404),
         ("hello123@gmail.com", "wrongpassword123", 403),
         ("wrongemail@gmail.com", "wrongpassword123", 403),
         (None, "password123", 422),
