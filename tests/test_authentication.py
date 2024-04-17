@@ -3,8 +3,6 @@ from jose import jwt
 import pytest
 from app.config import settings
 
-#
-
 def test_login_user(client, test_user):
     res = client.post(
         "/login",
