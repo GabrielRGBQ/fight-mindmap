@@ -6,6 +6,7 @@ from app.model import models, schemas
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+from app import utils
 
 SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}_test"
 
@@ -38,13 +39,10 @@ def client(session):
     # Base.metadata.drop_all(bind=engine)
 
 @pytest.fixture
-def populate_user(session):
-    """
-    Add a user to the testing database
-    """
+def test_user(client):
     user_data = {"email": "hello123@gmail.com", "name": "nombre", "password": "password123"}
-    def create_user_model(user_data: schemas.UserCreate):
-        return models.User(**user_data)
-    new_user = create_user_model(user_data)
-    session.add(new_user)
-    session.commit()
+    res = client.post("/users/", json=user_data)
+    assert res.status_code == 201
+    new_user = res.json()
+    new_user["password"] = user_data["password"]
+    return new_user

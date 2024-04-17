@@ -9,8 +9,7 @@ def test_create_user(client):
     assert new_user.email == "hello123@gmail.com"
     assert res.status_code == 201
 
-
-def test_create_user_duplicate(client, populate_user):
+def test_create_user_duplicate(client, test_user):
     res = client.post(
         "/users/", json={"email": "hello123@gmail.com", "name": "nombre", "password": "password123"}
     )
