@@ -25,10 +25,31 @@ class UserOut(User):
     id: int
     name: str
 
+############################################
+# ## MINDMAP
+############################################
+
+class Mindmap(BaseModel):
+    name: str
+    description: str
+    owner_id: int
+
+class MindmapCreate(Mindmap):
+    class Config:
+        orm_mode = True
+
+class MindmapOut(Mindmap):
+    owner: UserOut
+    class Config:
+        orm_mode = True
+
+############################################
+# ## TOKEN (AUTHENTICATION)
+############################################
+
 class Token(BaseModel):
     access_token: str
     token_type: str
-
 
 class TokenData(BaseModel):
     id: Optional[str] = None
