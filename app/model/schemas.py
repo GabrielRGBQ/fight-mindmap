@@ -35,12 +35,12 @@ class Mindmap(BaseModel):
     owner_id: int
 
 class MindmapCreate(Mindmap):
-    class Config:
+    class ConfigDict:
         orm_mode = True
 
 class MindmapOut(Mindmap):
     owner: UserOut
-    class Config:
+    class ConfigDict:
         orm_mode = True
 
 ############################################
