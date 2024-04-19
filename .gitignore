@@ -16,3 +16,7 @@ __pycache__/
 venv/
 env/
 .env/
+
+# Test coverage reports
+htmlcov/
+.coverage
