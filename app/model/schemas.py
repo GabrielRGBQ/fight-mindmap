@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr
 from typing import Optional
+
+from pydantic import BaseModel, EmailStr
 
 """
 Define models that must be used when calling the API as well as the format

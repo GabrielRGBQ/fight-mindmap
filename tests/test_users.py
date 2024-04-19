@@ -1,5 +1,7 @@
-from app.model import schemas
 from fastapi import status
+
+from app.model import schemas
+
 
 def test_create_user(client):
     res = client.post(

@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from .routers import user, authentication, mindmap
+
+from .routers import authentication, mindmap, user
+
 # from .database import engine
 
 

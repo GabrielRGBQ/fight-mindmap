@@ -1,9 +1,10 @@
-from fastapi import APIRouter, status, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
-from ..model import schemas, models
+from sqlalchemy.orm import Session
+
 from .. import utils
 from ..database import get_db
+from ..model import models, schemas
 
 """
 User-related API calls

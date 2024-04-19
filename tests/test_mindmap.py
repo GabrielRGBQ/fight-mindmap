@@ -1,5 +1,7 @@
-from app.model import schemas
 from fastapi import status
+
+from app.model import schemas
+
 
 def test_create_mindmap(client, test_user):
     test_data = {"name": "string", "description": "string", "owner_id": test_user["id"]}

@@ -1,10 +1,13 @@
-from fastapi import APIRouter, status, Depends, HTTPException
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from ..model import schemas, models
-from ..database import get_db
-from app import oauth2
 from typing import List
+
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from app import oauth2
+
+from ..database import get_db
+from ..model import models, schemas
 
 """
 Mindmap-related API calls
