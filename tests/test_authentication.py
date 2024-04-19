@@ -1,7 +1,9 @@
-from app.model import schemas
-from jose import jwt 
 import pytest
+from jose import jwt
+
 from app.config import settings
+from app.model import schemas
+
 
 def test_login_user(client, test_user):
     res = client.post(
