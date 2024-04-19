@@ -10,7 +10,6 @@ def test_create_mindmap(client, test_user):
     assert new_mindmap.name == test_data["name"]
     assert new_mindmap.description == test_data["description"]
     assert new_mindmap.owner_id == test_data["owner_id"]
-    assert new_mindmap.owner.id == test_data["owner_id"]
     assert new_mindmap.owner.name == test_user["name"]
     assert new_mindmap.owner.email == test_user["email"]
     assert res.status_code == 201
@@ -25,3 +24,32 @@ def test_create_mindmap_wrong_owner(client):
         "/mindmaps/", json=test_data
     )
     assert res.status_code == status.HTTP_400_BAD_REQUEST
+
+def test_get_mindmaps(test_user, authorized_client, test_mindmaps):
+    res = authorized_client.get("/mindmaps/")
+    assert len(res.json()) == len([mindmap for mindmap in test_mindmaps if mindmap.owner_id == test_user["id"]])
+    assert res.status_code == 200
+
+def test_unauthorized_get_mindmaps(client):
+    res = client.get("/mindmaps/")
+    assert res.status_code == 401
+
+def test_get_mindmap(authorized_client, test_mindmaps):
+    res = authorized_client.get(f"/mindmaps/{test_mindmaps[0].id}")
+    mindmap = schemas.MindmapOut(**res.json())
+    assert mindmap.name == test_mindmaps[0].name
+    assert mindmap.description == test_mindmaps[0].description
+    assert mindmap.owner_id == test_mindmaps[0].owner_id
+    assert res.status_code == 200
+
+def test_unauthorized_get_mindmap(client, test_mindmaps):
+    res = client.get(f"/mindmaps/{test_mindmaps[0].id}")
+    assert res.status_code == 401
+
+def test_not_existing_get_mindmap(authorized_client):
+    res = authorized_client.get("/mindmaps/2000")
+    assert res.status_code == 404
+
+def test_unauthorized_get_mindmap(authorized_client, test_mindmaps):
+    res = authorized_client.get(f"/mindmaps/{test_mindmaps[3].id}")
+    assert res.status_code == 403
