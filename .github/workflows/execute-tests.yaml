@@ -44,4 +44,4 @@ jobs:
       run: |
         pip install pytest
         python -m pytest --cov=app
-        python -m coverage report --fail-under=80
+        python -m coverage report --fail-under=${{secrets.COVERAGE_THRESHOLD}}
