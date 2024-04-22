@@ -44,3 +44,4 @@ jobs:
       run: |
         pip install pytest
         python -m pytest --cov=app
+        python -m coverage report --fail-under=50
